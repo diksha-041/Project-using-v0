@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Badge } from "@/components/ui/badge"
 import { Github, Linkedin, Mail, ChevronUp, Code, Database, Brain, Award, BookOpen, Send } from "lucide-react"
+import FadingText from "@/components/fading-text"
 
 export default function Portfolio() {
   const [showBackToTop, setShowBackToTop] = useState(false)
@@ -25,10 +26,12 @@ export default function Portfolio() {
   }
 
   const skills = [
-    { name: "C Programming", icon: Code, level: "Proficient" },
+    { name: "C", icon: Code, level: "Proficient" },
     { name: "Python", icon: Code, level: "Proficient" },
     { name: "MySQL", icon: Database, level: "Proficient" },
-    { name: "AI & Machine Learning", icon: Brain, level: "Learning" },
+    { name: "HTML5", icon: Code, level: "Proficient" },
+    { name: "CSS", icon: Code, level: "Learning" },
+    { name: "Machine Learning", icon: Brain, level: "Basics Covered" },
   ]
 
   const achievements = [
@@ -87,6 +90,12 @@ export default function Portfolio() {
             <h1 className="font-montserrat font-black text-4xl md:text-6xl mb-6 text-foreground">
               Hi, I'm <span className="text-primary">Diksha Sharma</span>
             </h1>
+            <FadingText
+              items={["A Dedicated Learner", "An Aspiring AI/ML engineer", "A Coding Enthusiast"]}
+              displayTime={1800}
+              fadeTime={300}
+              className="text-primary text-lg md:text-xl font-montserrat font-semibold mb-6"
+            />
             <p className="font-sans text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
               2nd-year B.Tech student in Computer Science & Engineering (AI & ML specialization) at MCKV Institute of
               Engineering
@@ -129,25 +138,35 @@ export default function Portfolio() {
           <h2 className="font-montserrat font-bold text-3xl md:text-4xl text-center mb-12 text-foreground">About Me</h2>
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <p className="font-sans text-lg text-muted-foreground mb-6 leading-relaxed">
-                I'm currently pursuing my B.Tech in Computer Science & Engineering with a specialization in AI & ML at
-                MCKV Institute of Engineering. As a fresher in the field, I'm enthusiastic about exploring the vast
-                possibilities that technology offers.
+              <p className="font-sans text-base md:text-lg text-muted-foreground mb-6 leading-relaxed">
+                Hello! I am a 2nd-Year Computer Science Student | AI & ML Specialist in Training.
               </p>
               <p className="font-sans text-lg text-muted-foreground mb-6 leading-relaxed">
-                My journey in computer science has been driven by curiosity and a desire to solve real-world problems
-                through code. I believe in continuous learning and am always excited to take on new challenges.
+                My current focus is mastering Data Structures, Algorithms, and the fundamentals of Python to build a
+                strong base for developing machine learning applications.
               </p>
-              <p className="font-sans text-lg text-muted-foreground leading-relaxed">
+              <p className="font-sans text-lg text-muted-foreground mb-6 leading-relaxed">
+                I am driven by curiosity and a desire to solve real-world problems through code. I believe in continuous
+                learning and am always excited to take on new challenges.
+              </p>
+              <p className="font-sans text-lg text-muted-foreground mb-6 leading-relaxed">
                 When I'm not coding, you'll find me reading books or writing, as I believe these hobbies help me think
                 more creatively and communicate better.
               </p>
+              <p className="font-sans text-lg text-muted-foreground mb-6 leading-relaxed">
+                This portfolio will track my growth and showcase my capabilities as they evolve.
+              </p>
+              <p className="font-sans text-lg text-muted-foreground leading-relaxed">
+                Watch this space as I build and share my First Projects!
+              </p>
             </div>
             <div className="flex justify-center">
-              <div className="w-80 h-80 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full flex items-center justify-center animate-float">
-                <div className="w-64 h-64 bg-card rounded-full flex items-center justify-center shadow-lg">
-                  <Code className="w-24 h-24 text-primary" />
-                </div>
+              <div className="relative w-80 h-80 md:w-96 md:h-96 rounded-full overflow-hidden animate-float bg-white">
+                <img
+                  src="/images/diksha-photo.png"
+                  alt="Portrait of Diksha Sharma"
+                  className="w-full h-full object-cover object-center"
+                />
               </div>
             </div>
           </div>
@@ -159,19 +178,27 @@ export default function Portfolio() {
         <div className="max-w-6xl mx-auto">
           <h2 className="font-montserrat font-bold text-3xl md:text-4xl text-center mb-12 text-foreground">Skills</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {skills.map((skill, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow duration-300 border-border">
-                <CardHeader className="text-center pb-4">
-                  <skill.icon className="w-12 h-12 text-primary mx-auto mb-4" />
-                  <CardTitle className="font-montserrat font-semibold text-lg">{skill.name}</CardTitle>
-                </CardHeader>
-                <CardContent className="text-center">
-                  <Badge variant="secondary" className="bg-secondary/10 text-secondary hover:bg-secondary/20">
-                    {skill.level}
-                  </Badge>
-                </CardContent>
-              </Card>
-            ))}
+            {skills.map((skill, index) => {
+              const colStart =
+                skill.name === "CSS" ? "lg:col-start-2" : skill.name === "Machine Learning" ? "lg:col-start-3" : ""
+
+              return (
+                <Card
+                  key={index}
+                  className={`hover:shadow-lg transition-shadow duration-300 border-border ${colStart}`}
+                >
+                  <CardHeader className="text-center pb-4">
+                    <skill.icon className="w-12 h-12 text-primary mx-auto mb-4" />
+                    <CardTitle className="font-montserrat font-semibold text-lg">{skill.name}</CardTitle>
+                  </CardHeader>
+                  <CardContent className="text-center">
+                    <Badge variant="secondary" className="bg-secondary/10 text-secondary hover:bg-secondary/20">
+                      {skill.level}
+                    </Badge>
+                  </CardContent>
+                </Card>
+              )
+            })}
           </div>
         </div>
       </section>
