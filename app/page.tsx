@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Badge } from "@/components/ui/badge"
-import { Github, Linkedin, Mail, ChevronUp, Code, Database, Brain, Award, BookOpen, Send } from "lucide-react"
+import { Github, Linkedin, Mail, ChevronUp, Brain, Award, BookOpen, Send } from "lucide-react"
 import FadingText from "@/components/fading-text"
 
 export default function Portfolio() {
@@ -25,13 +25,11 @@ export default function Portfolio() {
     window.scrollTo({ top: 0, behavior: "smooth" })
   }
 
-  const skills = [
-    { name: "C", icon: Code, level: "Proficient" },
-    { name: "Python", icon: Code, level: "Proficient" },
-    { name: "MySQL", icon: Database, level: "Proficient" },
-    { name: "HTML5", icon: Code, level: "Proficient" },
-    { name: "CSS", icon: Code, level: "Learning" },
-    { name: "Machine Learning", icon: Brain, level: "Basics Covered" },
+  const skillGroups = [
+    { title: "Programming", items: ["C/C++", "Python", "JavaScript", "Java"] },
+    { title: "DBMS", items: ["MySQL", "MongoDB"] },
+    { title: "Web Dev", items: ["HTML5", "CSS", "ReactJS", "NodeJS"] },
+    { title: "Tech stack", items: ["Git", "GitHub", "VS Code"] },
   ]
 
   const achievements = [
@@ -53,6 +51,12 @@ export default function Portfolio() {
       icon: Brain,
       year: "2025",
     },
+    {
+      title: "100 days of coding",
+      description: "on LeetCode.",
+      icon: Award,
+      year: "2025",
+    },
   ]
 
   return (
@@ -68,6 +72,9 @@ export default function Portfolio() {
               </a>
               <a href="#skills" className="text-muted-foreground hover:text-primary transition-colors">
                 Skills
+              </a>
+              <a href="#experience" className="text-muted-foreground hover:text-primary transition-colors">
+                Experience
               </a>
               <a href="#projects" className="text-muted-foreground hover:text-primary transition-colors">
                 Projects
@@ -100,9 +107,11 @@ export default function Portfolio() {
               2nd-year B.Tech student in Computer Science & Engineering (AI & ML specialization) at MCKV Institute of
               Engineering
             </p>
-            <p className="font-sans text-lg text-muted-foreground mb-10 max-w-2xl mx-auto">
-              Passionate about software development, AI/ML, and open-source contribution. Always eager to learn and
-              create innovative solutions.
+            <p className="font-sans text-lg text-muted-foreground mb-6 leading-relaxed">
+              Proficient in C/C++/Python | Passionate about Front End Development | Let's connect! E-mail me at:{" "}
+              <a href="mailto:17.diksha.sharma2006@gmail.com" className="text-primary underline underline-offset-4">
+                17.diksha.sharma2006@gmail.com
+              </a>
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
@@ -137,13 +146,14 @@ export default function Portfolio() {
         <div className="max-w-6xl mx-auto">
           <h2 className="font-montserrat font-bold text-3xl md:text-4xl text-center mb-12 text-foreground">About Me</h2>
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
+            <div className="text-justify">
               <p className="font-sans text-base md:text-lg text-muted-foreground mb-6 leading-relaxed">
                 Hello! I am a 2nd-Year Computer Science Student | AI & ML Specialist in Training.
               </p>
               <p className="font-sans text-lg text-muted-foreground mb-6 leading-relaxed">
                 My current focus is mastering Data Structures, Algorithms, and the fundamentals of Python to build a
-                strong base for developing machine learning applications.
+                strong base for developing machine learning applications. Simultaneously, I am focusing on web
+                development and developing projects as I progress step by step.
               </p>
               <p className="font-sans text-lg text-muted-foreground mb-6 leading-relaxed">
                 I am driven by curiosity and a desire to solve real-world problems through code. I believe in continuous
@@ -157,7 +167,7 @@ export default function Portfolio() {
                 This portfolio will track my growth and showcase my capabilities as they evolve.
               </p>
               <p className="font-sans text-lg text-muted-foreground leading-relaxed">
-                Watch this space as I build and share my First Projects!
+                Watch this space as I build and share more of my Projects!
               </p>
             </div>
             <div className="flex justify-center">
@@ -178,27 +188,77 @@ export default function Portfolio() {
         <div className="max-w-6xl mx-auto">
           <h2 className="font-montserrat font-bold text-3xl md:text-4xl text-center mb-12 text-foreground">Skills</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {skills.map((skill, index) => {
-              const colStart =
-                skill.name === "CSS" ? "lg:col-start-2" : skill.name === "Machine Learning" ? "lg:col-start-3" : ""
-
-              return (
-                <Card
-                  key={index}
-                  className={`hover:shadow-lg transition-shadow duration-300 border-border ${colStart}`}
-                >
-                  <CardHeader className="text-center pb-4">
-                    <skill.icon className="w-12 h-12 text-primary mx-auto mb-4" />
-                    <CardTitle className="font-montserrat font-semibold text-lg">{skill.name}</CardTitle>
-                  </CardHeader>
-                  <CardContent className="text-center">
-                    <Badge variant="secondary" className="bg-secondary/10 text-secondary hover:bg-secondary/20">
-                      {skill.level}
+            {skillGroups.map((group, idx) => (
+              <Card key={idx} className="hover:shadow-lg transition-shadow duration-300 border-border">
+                <CardHeader className="text-center pb-4">
+                  <CardTitle className="font-montserrat font-semibold text-lg">{group.title}</CardTitle>
+                </CardHeader>
+                <CardContent className="flex flex-wrap gap-2 justify-center">
+                  {group.items.map((item) => (
+                    <Badge
+                      key={item}
+                      variant="secondary"
+                      className="bg-secondary/10 text-secondary hover:bg-secondary/20"
+                    >
+                      {item}
                     </Badge>
-                  </CardContent>
-                </Card>
-              )
-            })}
+                  ))}
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Experience Section */}
+      <section id="experience" className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="font-montserrat font-bold text-3xl md:text-4xl text-center mb-12 text-foreground">
+            Experience
+          </h2>
+          <Card className="hover:shadow-lg transition-shadow duration-300 border-border max-w-3xl mx-auto">
+            <CardHeader>
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                <CardTitle className="font-montserrat font-semibold text-xl">Freelancer Developer</CardTitle>
+                <Badge variant="outline" className="w-fit">
+                  2025
+                </Badge>
+              </div>
+              <CardDescription className="font-sans text-base mt-2">
+                Built a few apps and prototypes for clients.
+              </CardDescription>
+            </CardHeader>
+          </Card>
+
+          {/* Hackathons subsection */}
+          <div className="mt-10">
+            <h3 className="font-montserrat font-semibold text-2xl text-center mb-6 text-foreground">Hackathons</h3>
+            <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+              <Card className="hover:shadow-lg transition-shadow duration-300 border-border">
+                <CardHeader>
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                    <CardTitle className="font-montserrat font-semibold text-lg">
+                      Won "Women in Tech" at ByteRush
+                    </CardTitle>
+                    <Badge variant="outline" className="w-fit">
+                      2025
+                    </Badge>
+                  </div>
+                </CardHeader>
+              </Card>
+              <Card className="hover:shadow-lg transition-shadow duration-300 border-border">
+                <CardHeader>
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                    <CardTitle className="font-montserrat font-semibold text-lg">
+                      Amongst Top 400 Qualifier Teams in StatusCode2
+                    </CardTitle>
+                    <Badge variant="outline" className="w-fit">
+                      2025
+                    </Badge>
+                  </div>
+                </CardHeader>
+              </Card>
+            </div>
           </div>
         </div>
       </section>
@@ -207,31 +267,25 @@ export default function Portfolio() {
       <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
         <div className="max-w-6xl mx-auto">
           <h2 className="font-montserrat font-bold text-3xl md:text-4xl text-center mb-12 text-foreground">Projects</h2>
-          <div className="text-center">
-            <Card className="max-w-2xl mx-auto border-border">
+          <div className="grid md:grid-cols-2 gap-6">
+            <Card className="border-border">
               <CardHeader>
-                <CardTitle className="font-montserrat font-semibold text-2xl text-primary">Future Scope</CardTitle>
-                <CardDescription className="font-sans text-lg">Exciting projects coming soon!</CardDescription>
+                <CardTitle className="font-montserrat font-semibold text-2xl">Digital Calculator</CardTitle>
+                <CardDescription className="font-sans text-base">
+                  A digital calculator made using HTML5 and CSS.
+                </CardDescription>
               </CardHeader>
-              <CardContent>
-                <p className="font-sans text-muted-foreground mb-6">
-                  I'm currently working on several innovative projects that combine my passion for AI/ML and software
-                  development. Stay tuned for updates on my GitHub profile!
-                </p>
-                <Button variant="outline" asChild>
-                  <a
-                    href="https://github.com/diksha-041"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2"
-                  >
-                    <Github className="w-4 h-4" />
-                    View GitHub Profile
-                  </a>
-                </Button>
-              </CardContent>
+            </Card>
+            <Card className="border-border">
+              <CardHeader>
+                <CardTitle className="font-montserrat font-semibold text-2xl">PicTrest</CardTitle>
+                <CardDescription className="font-sans text-base">
+                  A clone of Pinterest, built using HTML5 and CSS.
+                </CardDescription>
+              </CardHeader>
             </Card>
           </div>
+          <p className="text-center font-sans text-muted-foreground mt-6">More coming soon!</p>
         </div>
       </section>
 
@@ -377,6 +431,7 @@ export default function Portfolio() {
       <footer className="py-8 px-4 sm:px-6 lg:px-8 bg-muted/30 border-t border-border">
         <div className="max-w-6xl mx-auto text-center">
           <p className="font-sans text-muted-foreground">© 2024 Diksha Sharma. Built with passion and dedication.</p>
+          <p className="font-sans text-muted-foreground mt-2">Thanks for Visiting {"<3"}</p>
         </div>
       </footer>
 
